@@ -1,4 +1,4 @@
-package com.objectiflune.servlets.purl;
+package com.objectiflune.servlets.purl.demo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,13 +11,21 @@ import org.osgi.service.http.HttpContext;
 /**
  * A http context that always blocks access to resources.
  */
-public class PurlContext implements HttpContext {
+public class PurlVirtualHostContext implements HttpContext {
 
-	private static final Log LOG = LogFactory.getLog(PurlContext.class);
-
+	private static final Log LOG = LogFactory.getLog(PurlVirtualHostContext.class);
+	private final String virtualHost;
+	
+	public PurlVirtualHostContext(final String virtualHost){
+		this.virtualHost = virtualHost;
+	}
+	
 	public boolean handleSecurity(final HttpServletRequest request,
 			final HttpServletResponse response) throws IOException {
 		LOG.info("Forbiden access!");
+		if(!request.getServerName().equalsIgnoreCase(virtualHost)){
+			return false;
+		}
 		return true;
 	}
 

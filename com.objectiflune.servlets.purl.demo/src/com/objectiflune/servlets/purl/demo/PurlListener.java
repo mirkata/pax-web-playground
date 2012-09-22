@@ -1,4 +1,4 @@
-package com.objectiflune.servlets.purl;
+package com.objectiflune.servlets.purl.demo;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
